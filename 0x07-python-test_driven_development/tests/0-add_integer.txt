@@ -1,0 +1,20 @@
+# Test cases for add_integer function
+
+>>> add_integer(3, 5)
+8
+
+>>> add_integer(10)
+108
+
+>>> add_integer(2.5, 3.5)
+5
+
+>>> add_integer(2.5, 5)
+7
+
+# Uncomment the next line for an invalid input test
+# >>> add_integer("invalid", 5)
+# Traceback (most recent call last):
+# ...
+# TypeError: a must be an integer
+
