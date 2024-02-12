@@ -8,7 +8,7 @@ import turtle
 
 class Base:
     """
-    Representation of the base model
+    Represents the base model
     """
     __nb_objects = 0
     def __init__(self, id=None):
@@ -17,6 +17,7 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+
 
     @staticmethod
     def to_json_string(list_dictionaries):
@@ -29,6 +30,7 @@ class Base:
         to_json = json.dumps(list_dictionaries)
 
         return to_json
+
     @classmethod
     def save_to_file(cls, list_objs):
         """Writes the JSON string representation of list_objs to a file.
@@ -48,22 +50,13 @@ class Base:
 
     def from_json_string(json_string):
         """
-           Deserialize a JSON-formatted string and return the corresponding Python object.
 
-        Parameters:
-               - json_string (str): A JSON-formatted string to be deserialized.
-
-        Returns:
-            - obj: The Python object resulting from deserialization.
-
-        If the input `json_string` is None or an empty list representation ("[]"), an empty list is returned.
         """
-   
         if json_string is None or json_string == "[]":
-        return []
-    return json.loads(json_string)
+            return []
+        return json.loads(json_string)
 
-  @classmethod
+    @classmethod
     def create(cls, **dictionary):
         """Returns an instance with all attributes already set.
         """
@@ -78,42 +71,29 @@ class Base:
 
     @classmethod
     def load_from_file(cls):
-    """
-    Load instances of the class from a JSON file.
+        """
 
-    Parameters:
-    - cls: The class (type) of the instances to be loaded.
+        """
+        file_name = "{}.json".format(cls.__name__)
 
-    Returns:
-    - list: A list of instances of the specified class loaded from the JSON file.
+        try:
+            with open(file_name, "r") as jsonfile:
+                list_dicts = Base.from_json_string(jsonfile.read())
 
-    This method reads a JSON file named '{class_name}.json' where {class_name} is the name of the class.
-    It deserializes the JSON content into a list of dictionaries, then creates instances of the class
-    using the 'create' method and the key-value pairs in each dictionary.
+                list_instances = []
 
-    If the file is not found, an empty list is returned.
-    """
-    file_name = "{}.json".format(cls.__name__)
-
-    try:
-        with open(file_name, "r") as jsonfile:
-            list_dicts = Base.from_json_string(jsonfile.read())
-
-            list_instances = []
-
-            for d in list_dicts:
-                list_instances.append(cls.create(**d))
-            return list_instances
-    except FileNotFoundError:
-        return []
-
+                for d in list_dicts:
+                    list_instances.append(cls.create(**d))
+                return list_instances
+        except FileNotFoundError:
+            return []
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """
-        Writes the CSV serialization of a list of objects to a file.
+        Write the CSV serialization of a list of objects to a file.
         """
-        
+        # corrected the name of the file extension from .json to .csv
         file_name = "{}.csv".format(cls.__name__)
 
         with open(file_name, "w") as csvfile:
@@ -132,7 +112,7 @@ class Base:
     @classmethod
     def load_from_file_csv(cls):
         """
-        Returns a list of classes instantiated from a CSV file.
+        Return a list of classes instantiated from a CSV file.
         """
         # corrected the name of the file extension from .json to .csv
         file_name = "{}.csv".format(cls.__name__)
@@ -223,6 +203,7 @@ class Base:
             turt.hideturtle()
 
         turtle.exitonclick()
+
 if __name__ == "__main__":
 
-    pass 
+    pass
