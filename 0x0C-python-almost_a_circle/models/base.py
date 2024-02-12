@@ -50,8 +50,17 @@ class Base:
 
     def from_json_string(json_string):
         """
+        Deserialize a JSON-formatted string and return the corresponding python object.
 
+        Parameters:
+        - json_string (str): A JSON-formatted string to be deserialized.
+
+        Returns:
+        - obj: The python object resulting from deserialization.
+
+        if the input 'json_string' is None or an empty list representation an empty list is returned.
         """
+
         if json_string is None or json_string == "[]":
             return []
         return json.loads(json_string)
