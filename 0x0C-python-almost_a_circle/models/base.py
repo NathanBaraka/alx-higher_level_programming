@@ -46,3 +46,21 @@ class Base:
                     list_dict.append(obj.to_dictionary())
                 jsonfile.write(Base.to_json_string(list_dict))
 
+    def from_json_string(json_string):
+    """
+    Deserialize a JSON-formatted string and return the corresponding Python object.
+
+    Parameters:
+    - json_string (str): A JSON-formatted string to be deserialized.
+
+    Returns:
+    - obj: The Python object resulting from deserialization.
+
+    If the input `json_string` is None or an empty list representation ("[]"), an empty list is returned.
+
+    """
+    if json_string is None or json_string == "[]":
+        return []
+    return json.loads(json_string)
+
+   
