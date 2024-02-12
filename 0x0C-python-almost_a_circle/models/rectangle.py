@@ -34,7 +34,7 @@ class Rectangle(Base):
         # boolen val checker added, if the check is removed
         # the unittest for it will fail
         if not isinstance(value, int) or isinstance(value, bool):
-            raise TypeError("width must be an int")
+            raise TypeError("width must be an integer")
         if value <= 0:
             raise ValueError("width must be > 0")
         self.__width = value
