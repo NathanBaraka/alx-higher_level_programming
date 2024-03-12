@@ -1,2 +1,2 @@
---Displays all tables in mySQL databse.
+-- Displays all tables in mySQL databse.
 SHOW TABLES;
