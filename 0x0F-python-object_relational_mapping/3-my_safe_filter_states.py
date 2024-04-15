@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module that lists all states from the hbtn_0e_0_usa database."""
+"""Module that lists all states from the hbtn_0e_0_usa database."""
 import sys
 import MySQLdb
 
@@ -7,13 +7,13 @@ if __name__ == "__main__":
     import MySQLdb
     import sys
 
-    # Gets the command-line args.
+    # Get the command-line arguments
     mysql_username = sys.argv[1]
     mysql_password = sys.argv[2]
     database_name = sys.argv[3]
     state_name = sys.argv[4]
 
-    # Connecting to the MySQL server.
+    # Connect to the MySQL server
     db = MySQLdb.connect(
         host='localhost',
         port=3306,
@@ -22,21 +22,23 @@ if __name__ == "__main__":
         db=database_name
     )
 
-    # Creates a cursor object to execute queries.
+    # Create a cursor object to execute queries
     cursor = db.cursor()
 
-    # Prepares the SQL query with placeholders.
+    # Prepare the SQL query with placeholders
     sql_query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
 
-    # Executes the query with the state name as a parameter.
+    # Execute the query with the state name as a parameter
     cursor.execute(sql_query, (state_name,))
 
-    # Fetches all the rows returned by the query.
+    # Fetch all the rows returned by the query
     rows = cursor.fetchall()
 
-    # Displays the results.
+    # Display the results
+    for row in rows:
         print(row)
 
-    # Closes the cursor and database connection.
+    # Close the cursor and database connection
     cursor.close()
     db.close()
+
